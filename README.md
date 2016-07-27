@@ -1,5 +1,13 @@
 # Applause iOS SDK 串接 Unity 使用說明
 
+這份文件可以幫助開發者快速的將 `Applause iOS SDK` 導入 `Unity` 專案中, 下面我們將以這幾個大項, 來一步步的完成
+
+ * [事前準備](https://github.com/DaidoujiChen/ios-sdk-demo-unity/blob/master/README.md#事前準備)
+ * [Unity 端設定](https://github.com/DaidoujiChen/ios-sdk-demo-unity/blob/master/README.md#unity-端設定)
+ * [Xcode 端設定](https://github.com/DaidoujiChen/ios-sdk-demo-unity/blob/master/README.md#xcode-端設定)
+ * [VAAdUnityRewardedVideo 使用說明](https://github.com/DaidoujiChen/ios-sdk-demo-unity/blob/master/README.md#vaadunityrewardedvideo-使用說明)
+
+
 ## 事前準備
 
   * 請先下載 `VAAdUnityRewardedVideo.unitypackage`
