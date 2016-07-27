@@ -48,7 +48,50 @@
 
 設定完成後, 可以開始編譯, 如果沒有其他問題的話, 可以看見 `Applause` 的 `Reward Video` 廣告
 
+## VAAdUnityRewardedVideo 使用說明
 
+透過 C# 使用我們的 SDK 非常的容易, 初始化的方法為
+
+`````C#
+playAd(string placement, bool testMode, string apiKey);
+`````
+
+ * `placement` 為廣告的 placement
+ * `testMode` 為 true 時為測試模式, false 時為正式模式
+ * `apiKey` 從 `Applause` 取得的一組 key 值
+
+其餘的部分則為廣告的 callback, 可以選擇需要的部分來做 implement
+
+`````C#
+// 廣告讀取完成, 即將開始播放
+onRewardedVideoDidLoad();
+
+// 廣告將要開始播放
+onRewardedVideoWillShow();
+
+// 廣告已經開始播放
+onRewardedVideoDidShow();
+
+// 廣告將要關閉
+onRewardedVideoWillClose();
+
+// 廣告已經關閉
+onRewardedVideoDidClose();
+
+// 廣告被點擊
+onRewardedVideoDidClick();
+
+// 點擊之後回到 app 的跳轉事件
+onRewardedVideoDidFinishHandlingClick();
+
+// 使用者看完影片, 可以得到獎勵
+onShouldReward();
+
+// 如果遇到錯誤, 則會收到錯誤訊息
+onDidFailWithError();
+`````
+
+詳細的介接用法, 可以參考 `TestAd.cs`
 
 
 
