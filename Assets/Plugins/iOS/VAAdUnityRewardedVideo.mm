@@ -14,6 +14,7 @@ extern "C" void UnitySendMessage(const char *, const char *, const char *);
 @interface VAAdUnityRewardedVideo ()
 
 @property (nonatomic, strong) VAAdRewardedVideo *rewardedVideo;
+@property (nonatomic, assign) const char *(*customStringCallback)(const char*);
 
 @end
 
@@ -58,6 +59,15 @@ extern "C" void UnitySendMessage(const char *, const char *, const char *);
     UnitySendMessage("adUnityRewardedVideoObject", "didFailWithError", error.description.UTF8String);
 }
 
+- (NSString *)rewardedCustomString {
+    if ([VAAdUnityRewardedVideo shared].customStringCallback) {
+        return [NSString stringWithFormat:@"%s", [VAAdUnityRewardedVideo shared].customStringCallback("")];
+    }
+    else {
+        return @"";
+    }
+}
+
 #pragma mark - Class Method
 
 + (instancetype)shared {
@@ -81,17 +91,21 @@ extern "C" void UnitySendMessage(const char *, const char *, const char *);
 @end
 
 extern "C" {
+    typedef const char *(*CustomStringCallback)(const char *);
     void _startWithPlacement(const char *placement, BOOL testMode, const char *apiKey);
+    void _setRewardedCustomString(CustomStringCallback customStringCallback);
     void _echo(const char *echo);
 }
 
 void _startWithPlacement(const char *placement, BOOL testMode, const char *apiKey) {
+    [VAAdUnityRewardedVideo shared].customStringCallback = nil;
     [[VAAdUnityRewardedVideo shared] initWithPlacement:[NSString stringWithFormat:@"%s", placement] isTestMode:testMode andAPIKey:[NSString stringWithFormat:@"%s", apiKey]];
+}
+
+void _setRewardedCustomString(CustomStringCallback customStringCallback) {
+    [VAAdUnityRewardedVideo shared].customStringCallback = customStringCallback;
 }
 
 void _echo(const char *echo) {
     NSLog(@"%s", echo);
 }
-
-
-

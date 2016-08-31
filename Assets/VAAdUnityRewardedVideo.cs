@@ -7,6 +7,8 @@ public class VAAdUnityRewardedVideo : MonoBehaviour {
 	// connect with objc code
 	[DllImport("__Internal")]
 	private static extern void _startWithPlacement(string placement, bool testMode, string apiKey);
+	[DllImport("__Internal")]
+	private static extern void _setRewardedCustomString(customStringCallback callback);
 
 	// shared instance
 	private static readonly VAAdUnityRewardedVideo _shared = (new GameObject ("adUnityRewardedVideoObject")).AddComponent<VAAdUnityRewardedVideo>();
@@ -40,6 +42,7 @@ public class VAAdUnityRewardedVideo : MonoBehaviour {
 
 	// define callback format
 	public delegate void callbackFunction(string message);
+	public delegate string customStringCallback(string message);
 
 	// callback rewardedVideoDidLoad
 	private callbackFunction _rewardedVideoDidLoad;
@@ -138,6 +141,11 @@ public class VAAdUnityRewardedVideo : MonoBehaviour {
 	}
 	public void onDidFailWithError(callbackFunction callback) {
 		_didFailWithError = callback;
+	}
+
+	// callback rewardedCustomString
+	public void onSetRewardedCustomString(customStringCallback callback) {
+		_setRewardedCustomString(callback);
 	}
 
 }

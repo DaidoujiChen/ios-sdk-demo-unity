@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Runtime.InteropServices;
+using AOT;
 
 public class TestAd : MonoBehaviour {
 
@@ -44,6 +45,12 @@ public class TestAd : MonoBehaviour {
 		_echo("handleDidFailWithError");
 	}
 
+	[MonoPInvokeCallback (typeof(VAAdUnityRewardedVideo.customStringCallback))]
+	private string handleSetRewardedCustomString(string message) {
+		_echo("handleSetRewardedCustomString");
+		return "DaidoujiUnityRewardCustomString";
+	}
+
 	void Start () {
 		VAAdUnityRewardedVideo.shared.playAd("daidouji", true, "");
 		VAAdUnityRewardedVideo.shared.onRewardedVideoDidLoad(handleRewardedVideoDidLoad);
@@ -55,6 +62,7 @@ public class TestAd : MonoBehaviour {
 		VAAdUnityRewardedVideo.shared.onRewardedVideoDidFinishHandlingClick(handleRewardedVideoDidFinishHandlingClick);
 		VAAdUnityRewardedVideo.shared.onShouldReward(handleShouldReward);
 		VAAdUnityRewardedVideo.shared.onDidFailWithError(handleDidFailWithError);
+		VAAdUnityRewardedVideo.shared.onSetRewardedCustomString(handleSetRewardedCustomString);
 	}
 
 	void Update () {
