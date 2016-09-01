@@ -97,6 +97,9 @@ onShouldReward();
 
 // 如果遇到錯誤, 則會收到錯誤訊息
 onDidFailWithError();
+
+// 如果有需要額外傳回給 server 的字串, 可以利用這個 function 帶回 callback
+onSetRewardedCustomString();
 `````
 
 詳細的介接用法, 可以參考 `TestAd.cs`
